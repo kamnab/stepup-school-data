@@ -7,7 +7,7 @@ import router from './router'
 import { initAuthListeners } from '@/services/authService';
 
 // Initialize authentication listeners early in the app lifecycle
-initAuthListeners();
+//initAuthListeners();
 
 const app = createApp(App)
 
