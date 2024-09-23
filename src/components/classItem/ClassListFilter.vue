@@ -1,10 +1,10 @@
 <template>
     <div>
-        <h1>Filter:</h1>
+        <h4 class="mb-0 text-gray-700">ច្រោះទិន្នន័យ៖</h4>
         <div class="row">
             <div class="col-md-3">
                 <!-- User Input Fields for Filtering -->
-                <input class="form-control" v-model="tempFilters.schoolName" @keydown.enter="applyFilter"
+                <input class="form-control my-2 py-2" v-model="tempFilters.schoolName" @keydown.enter="applyFilter"
                     placeholder="អង្គភាព" />
             </div>
 
@@ -12,7 +12,7 @@
                 <!-- <input class="form-control" v-model="tempFilters.province" @keydown.enter="applyFilter"
                     placeholder="រាជធានី ខេត្ត" /> -->
                 <!-- <input class="form-control" v-model="tempFilters.type" @keydown.enter="applyFilter" placeholder="ប្រភេទសាលា" /> -->
-                <select class="form-select" v-model="tempFilters.province" aria-label="Select example">
+                <select class="form-select my-2 py-2" v-model="tempFilters.province" aria-label="Select example">
                     <option value="">-- រាជធានី ខេត្ត --</option>
                     <option v-for="province in provinceData" :value="province">{{ province }}</option>
                 </select>
@@ -20,7 +20,7 @@
 
             <div class="col-md-3">
                 <!-- <input class="form-control" v-model="tempFilters.type" @keydown.enter="applyFilter" placeholder="ប្រភេទសាលា" /> -->
-                <select class="form-select" v-model="tempFilters.type" aria-label="Select example">
+                <select class="form-select my-2 py-2" v-model="tempFilters.type" aria-label="Select example">
                     <option value="">-- ប្រភេទសាលា --</option>
                     <option v-for="type in schoolType" :value="type">{{ type }}</option>
                 </select>
@@ -28,7 +28,7 @@
 
             <div class="col-md-3 d-flex justify-content-between align-items-center">
                 <!-- Checkbox for Model School Standard Status -->
-                <div class="form-check">
+                <div class="form-check form-check-custom form-check-sm my-2 py-2">
                     <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
                         v-model="tempFilters.modelSchoolStandardStatus" @keydown.enter="applyFilter" />
                     <label class="form-check-label" for="flexCheckChecked">
@@ -41,14 +41,14 @@
             ជាប់ស្ដង់ដា
         </label> -->
                 <!-- Filter Button -->
-                <button class="btn btn-sm btn-light-primary" @click="applyFilter">ស្វែងរក</button>
+                <button class="btn btn-sm btn-primary" @click="applyFilter">ស្វែងរក</button>
 
             </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-12">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-12 border-top my-5 mw-300px">
 
         </div>
     </div>

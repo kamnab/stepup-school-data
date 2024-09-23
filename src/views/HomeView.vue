@@ -10,7 +10,7 @@ import MyTask from '@/components/classItem/MyTask.vue';
   <div class="d-flex flex-column flex-column-fluid">
 
     <!--begin::Content-->
-    <div class="content fs-6 d-flex flex-column-fluid" id="kt_content" style="padding: 20px 0;">
+    <div class="content fs-6 d-flex flex-column-fluid" id="kt_content" style="padding: 10px 0;">
       <!--begin::Container-->
       <div class="container">
 
