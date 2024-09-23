@@ -3,6 +3,12 @@
         <h1>Filter:</h1>
         <div class="row">
             <div class="col-md-3">
+                <!-- User Input Fields for Filtering -->
+                <input class="form-control" v-model="tempFilters.schoolName" @keydown.enter="applyFilter"
+                    placeholder="អង្គភាព" />
+            </div>
+
+            <div class="col-md-3">
                 <!-- <input class="form-control" v-model="tempFilters.province" @keydown.enter="applyFilter"
                     placeholder="រាជធានី ខេត្ត" /> -->
                 <!-- <input class="form-control" v-model="tempFilters.type" @keydown.enter="applyFilter" placeholder="ប្រភេទសាលា" /> -->
@@ -44,11 +50,7 @@
                      -->
                 </select>
             </div>
-            <div class="col-md-3">
-                <!-- User Input Fields for Filtering -->
-                <input class="form-control" v-model="tempFilters.schoolName" @keydown.enter="applyFilter"
-                    placeholder="អង្គភាព" />
-            </div>
+
             <div class="col-md-3">
                 <!-- <input class="form-control" v-model="tempFilters.type" @keydown.enter="applyFilter" placeholder="ប្រភេទសាលា" /> -->
                 <select class="form-select" v-model="tempFilters.type" aria-label="Select example">
@@ -74,7 +76,7 @@
             ជាប់ស្ដង់ដា
         </label> -->
                 <!-- Filter Button -->
-                <button class="btn btn-sm btn-light-primary" @click="applyFilter">Filter</button>
+                <button class="btn btn-sm btn-light-primary" @click="applyFilter">ស្វែងរក</button>
 
             </div>
         </div>
