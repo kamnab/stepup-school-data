@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h4 class="mb-0 text-gray-700">ច្រោះទិន្នន័យ៖</h4>
+        <h4 class="mb-1 text-gray-700">ច្រោះទិន្នន័យ៖</h4>
         <div class="row">
             <div class="col-md-3">
                 <!-- User Input Fields for Filtering -->
@@ -22,7 +22,7 @@
                 <!-- <input class="form-control" v-model="tempFilters.type" @keydown.enter="applyFilter" placeholder="ប្រភេទសាលា" /> -->
                 <select class="form-select my-2 py-2" v-model="tempFilters.type" aria-label="Select example">
                     <option value="">-- ប្រភេទសាលា --</option>
-                    <option v-for="type in schoolType" :value="type">{{ type }}</option>
+                    <option v-for="type in schoolTypes" :value="type">{{ type }}</option>
                 </select>
             </div>
 
@@ -56,10 +56,29 @@
     <!-- Filtered Results -->
     <div class="card mt-5">
         <div class="card-body">
-            <div class="d-flex ">
-                <u>ទិន្នន័យ</u>៖ {{ filteredData.length }}/{{ schoolData.length }}
-                <div><a href="https://drive.google.com/file/d/1DinD0TA2Xu32_p2lA9YhgdGSCFktGqXI/view?usp=sharing"
-                        target="_blank" class="text-muted">&nbsp;(បញ្ជីសាលា) </a></div>
+            <div class="d-flex">
+                <span class="">បង្ហាញ</span>៖ {{ filteredData.length }}/{{ schoolData.length }}
+                <div class="d-flex">
+                    <div class="dropdown">
+                        <button class="btn text-muted py-0 px-2" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            (បញ្ជីសាលា)
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a target="_blank"
+                                    class="dropdown-item btn btn-xs btn-light py-2 text-gray-800 border-bottom"
+                                    style="border-radius: 0%;"
+                                    href="https://drive.google.com/file/d/1DinD0TA2Xu32_p2lA9YhgdGSCFktGqXI/view?usp=sharing">PDF</a>
+                            </li>
+                            <li><a target="_blank"
+                                    class="dropdown-item btn btn-xs btn-light py-2 text-gray-800 border-top"
+                                    style="border-radius: 0%;"
+                                    href="https://api.codemie.dev/file/259-stepup-schools-excel">Excel (Zip)</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--  -->
             </div>
             <div class="table-responsive">
                 <table class="table table-striped text-nowrap">
@@ -84,7 +103,9 @@
                             <td>{{ item.id }}</td>
                             <td>{{ item.province }}</td>
                             <td>{{ item.schoolName }}</td>
-                            <td>{{ item.type }}</td>
+                            <td><span v-for="(t, i) in item.type" style="">{{ t.replace(i > 0 ? SRS : '-', '-')
+                                    }}</span>
+                            </td>
                             <td><a v-if="item.profileLink != ''" :href="item.profileLink" target="_blank">ទាញយកទីនេះ</a>
                             </td>
                             <td><a v-if="item.inspectionReportLink != ''" :href="item.inspectionReportLink"
@@ -111,7 +132,7 @@
 import { ref, computed } from 'vue';
 import schoolData from '@/data/schoolData';
 import provinceData from '@/data/provinceData';
-import schoolType from '@/data/schoolType';
+import { SRS, schoolTypes } from '@/data/schoolType';
 
 // Sample data
 const dataList = ref(schoolData);
@@ -128,22 +149,35 @@ const tempFilters = ref({
 const filters = ref({
     schoolName: '',
     province: '',
-    type: '',
+    type: [],
     modelSchoolStandardStatus: false
 });
 
 // Function to apply the temporary filter values to the actual filters on button click or Enter key press
 const applyFilter = () => {
-    filters.value = { ...tempFilters.value };
+    //filters.value = { ...tempFilters.value };
+    filters.value.schoolName = tempFilters.value.schoolName;
+    filters.value.province = tempFilters.value.province;
+    filters.value.type = [tempFilters.value.type]; // Copy the array
+    filters.value.modelSchoolStandardStatus = tempFilters.value.modelSchoolStandardStatus;
 };
 
 // Computed property to filter data based on the filters
 const filteredData = computed(() => {
     return dataList.value.filter(item => {
         return (
+            // Check schoolName filter
             (!filters.value.schoolName || item.schoolName.toLowerCase().includes(filters.value.schoolName.toLowerCase())) &&
+
+            // Check province filter
             (!filters.value.province || item.province.toLowerCase().includes(filters.value.province.toLowerCase())) &&
-            (!filters.value.type || item.type.toLowerCase().includes(filters.value.type.toLowerCase())) &&
+
+            // Check type filter (if there are selected types)
+            (filters.value.type.length === 0 || filters.value.type.some(filterType =>
+                item.type.some(type => type.toLowerCase().includes(filterType.toLowerCase()))
+            )) &&
+
+            // Check modelSchoolStandardStatus filter
             (!filters.value.modelSchoolStandardStatus || item.modelSchoolStandardStatus === filters.value.modelSchoolStandardStatus)
         );
     });
