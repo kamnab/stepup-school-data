@@ -1,10 +1,14 @@
 const SRS = 'សាលាធនធាន';
+const SRSChinaAid = 'សាលាធនធានចិន';
+const NWS = 'សាលាបណ្ដាញ';
+const GSE = 'សាលាចំណេះទូទៅ(ធម្មតា)';
+const TechnicalSchool = 'សាលាបច្ចេកទេស';
 const schoolTypes = [
     SRS,
-    'សាលាធនធានចិន',
-    'សាលាបណ្ដាញ',
-    'សាលាចំណេះទូទៅ(ធម្មតា)',
-    'សាលាបច្ចេកទេស',
+    SRSChinaAid,
+    NWS,
+    GSE,
+    TechnicalSchool,
 ]
 
-export { SRS, schoolTypes }
+export { SRS, SRSChinaAid, NWS, GSE, TechnicalSchool, schoolTypes }

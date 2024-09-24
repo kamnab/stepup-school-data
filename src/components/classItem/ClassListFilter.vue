@@ -56,29 +56,76 @@
     <!-- Filtered Results -->
     <div class="card mt-5">
         <div class="card-body">
-            <div class="d-flex">
-                <span class="">បង្ហាញ</span>៖ {{ filteredData.length }}/{{ schoolData.length }}
-                <div class="d-flex">
-                    <div class="dropdown">
-                        <button class="btn text-muted py-0 px-2" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            (បញ្ជីសាលា)
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a target="_blank"
-                                    class="dropdown-item btn btn-xs btn-light py-2 text-gray-800 border-bottom"
-                                    style="border-radius: 0%;"
-                                    href="https://drive.google.com/file/d/1DinD0TA2Xu32_p2lA9YhgdGSCFktGqXI/view?usp=sharing">PDF</a>
-                            </li>
-                            <li><a target="_blank"
-                                    class="dropdown-item btn btn-xs btn-light py-2 text-gray-800 border-top"
-                                    style="border-radius: 0%;"
-                                    href="https://api.codemie.dev/file/259-stepup-schools-excel">Excel (Zip)</a>
-                            </li>
-                        </ul>
+            <div class="d-flex align-items-top justify-content-between">
+                <!--begin::Accordion-->
+                <div class="accordion accordion-icon-toggle" id="kt_accordion_1">
+                    <!--begin::Item-->
+                    <div class="mb-5">
+                        <!--begin::Header-->
+                        <div class="accordion-header py-2 d-flex collapsed" data-bs-toggle="collapse"
+                            data-bs-target="#kt_accordion_1_item_2">
+                            <span class="accordion-icon">
+                                <!--begin::Svg Icon | path: icons/duotone/Navigation/Right-2.svg-->
+                                <span class="svg-icon svg-icon-6">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <polygon points="0 0 24 0 24 24 0 24" />
+                                            <rect fill="#000000" opacity="0.5"
+                                                transform="translate(8.500000, 12.000000) rotate(-90.000000) translate(-8.500000, -12.000000)"
+                                                x="7.5" y="7.5" width="2" height="9" rx="1" />
+                                            <path
+                                                d="M9.70710318,15.7071045 C9.31657888,16.0976288 8.68341391,16.0976288 8.29288961,15.7071045 C7.90236532,15.3165802 7.90236532,14.6834152 8.29288961,14.2928909 L14.2928896,8.29289093 C14.6714686,7.914312 15.281055,7.90106637 15.675721,8.26284357 L21.675721,13.7628436 C22.08284,14.136036 22.1103429,14.7686034 21.7371505,15.1757223 C21.3639581,15.5828413 20.7313908,15.6103443 20.3242718,15.2371519 L15.0300721,10.3841355 L9.70710318,15.7071045 Z"
+                                                fill="#000000" fill-rule="nonzero"
+                                                transform="translate(14.999999, 11.999997) scale(1, -1) rotate(90.000000) translate(-14.999999, -11.999997)" />
+                                        </g>
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->
+                            </span>
+                            <h6 class="fs-7 text-gray-800 fw-bold mb-0 ms-1">
+                                <span class="">បង្ហាញ</span>៖ {{ filteredData.length }}/{{ schoolData.length }}
+                            </h6>
+                        </div>
+                        <!--end::Header-->
+                        <!--begin::Body-->
+                        <div id="kt_accordion_1_item_2" class="collapse fs-6 ps-10" data-bs-parent="#kt_accordion_1">
+                            <div class="">
+                                - {{ SRS }}៖ <b>{{ countSchoolType(SRS) }}</b>
+                            </div>
+                            <div class="">
+                                - {{ NWS }}៖ <b>{{ countSchoolType(NWS) }}</b>
+                            </div>
+                            <div class="">
+                                - {{ GSE }}៖ <b>{{ countSchoolType(GSE) }}</b>
+                            </div>
+                            <div class="">
+                                - {{ TechnicalSchool }}៖ <b>{{ countSchoolType(TechnicalSchool) }}</b>
+                            </div>
+                        </div>
+                        <!--end::Body-->
                     </div>
+                    <!--end::Item-->
+
                 </div>
-                <!--  -->
+                <!--end::Accordion-->
+                <div class="dropdown" style="position: absolute; right: 20px;">
+                    <button class="btn bg-light-warning fs-7 py-1 px-2 text-nowrap" type="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        បញ្ជីសាលា
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a target="_blank"
+                                class="dropdown-item btn btn-xs btn-light py-2 text-gray-800 border-bottom"
+                                style="border-radius: 0%;"
+                                href="https://drive.google.com/file/d/1DinD0TA2Xu32_p2lA9YhgdGSCFktGqXI/view?usp=sharing">PDF</a>
+                        </li>
+                        <li><a target="_blank" class="dropdown-item btn btn-xs btn-light py-2 text-gray-800 border-top"
+                                style="border-radius: 0%;"
+                                href="https://api.codemie.dev/file/259-stepup-schools-excel">Excel (Zip)</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div class="table-responsive">
                 <table class="table table-striped text-nowrap">
@@ -132,7 +179,7 @@
 import { ref, computed } from 'vue';
 import schoolData from '@/data/schoolData';
 import provinceData from '@/data/provinceData';
-import { SRS, schoolTypes } from '@/data/schoolType';
+import { GSE, NWS, SRS, SRSChinaAid, TechnicalSchool, schoolTypes } from '@/data/schoolType';
 
 // Sample data
 const dataList = ref(schoolData);
@@ -182,4 +229,11 @@ const filteredData = computed(() => {
         );
     });
 });
+
+const countSchoolType = (schoolType) => {
+    return filteredData.value.filter(item =>
+        item.type.some(type => type.toLowerCase().includes(schoolType.toLowerCase()))
+    ).length;
+};
+
 </script>
